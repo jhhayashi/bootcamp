@@ -7,6 +7,13 @@ var app = express()
 // use a for loop to create an array with each lowercase letter in the alphabet
 // resulting array should be ['a', 'b', ... 'y', 'z']
 
+// bahahaha i hope this causes a merge conflict so you can practice resolving
+var deleteThis = ['sorry', 'guys']
+for (var i = 0; i < deleteThis.length; i++) {
+    console.log(deleteThis[i]);
+}
+
+
 // use a for loop to generate an app.get function for each endpoint
 // callback function should res.send the letter's index in the alphabet
 // do not use block scoped variables (let)
