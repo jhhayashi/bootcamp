@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "version": "0.0.0",
+  "author": "Jordan Hayashi <jhhayashi@gmail.com>",
+  "private": true,
+  "scripts": {
+    "build": "npm install && grunt publish",
+    "dev": "grunt & nodemon test.js"
+  },
+  "dependencies": {
+    "async": "^2.1.4",
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "pug": "^2.0.0-beta6",
+    "request": "^2.79.0",
+    "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-stylus": "^1.2.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "uglify": "^0.1.5"
+  }
+}

@@ -1,0 +1,5 @@
+#!/bin/bash
+
+npm install express
+pip install Flask || (echo "couldn't install Flask" && exit 0)
+export FLASK_APP=hello_flask.py
