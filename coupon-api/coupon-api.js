@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
+// maybe this too
 const bodyParser = require('body-parser');
 
 const config = require('./models/config');
@@ -23,12 +24,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //================================================
 
 app.get('/users', users.getUsers);
+// this should merge conflict
 app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
 
 // handle 404
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
+    // who knows
     err.status = 404;
     next(err);
 });
