@@ -5,6 +5,8 @@ const bodyParser = require('body-parser');
 
 const config = require('./models/config');
 
+const users = require('./controllers/users');
+
 var app = express();
 
 if (app.get('env') === 'development') var dev = true;
@@ -15,10 +17,15 @@ if (dev) app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+
+// for now
+var userDb= [];
+
 //================================================
 // Routes
 //================================================
 
+app.post('/users', users.createUser);
 
 // handle 404
 app.use(function(req, res, next) {
