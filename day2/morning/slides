@@ -1,0 +1,3 @@
+#!/bin/bash
+
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app=https://docs.google.com/presentation/d/1E_Mv6hwqojwCwC0FEMcRhs_isTT40JN-nRdaGpmFSLg/pub
