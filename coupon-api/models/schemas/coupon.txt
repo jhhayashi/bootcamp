@@ -1,0 +1,13 @@
+name
+url
+companyName
+startDate
+endDate
+tags
+clicks
+views
+redeems
+postedBy
+approvedDate
+createdDate
+updatedDate

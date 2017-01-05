@@ -1,0 +1,16 @@
+firstName
+lastName
+address
+classYear
+email
+phone
+phoneProvider
+venmo
+isAdmin
+isSuperAdmin
+hash
+companyName
+createdDate
+updatedDate
+interests
+timeSpent
