@@ -1,0 +1,16 @@
+{
+  "name": "hsa-coupon-api",
+  "version": "0.0.0",
+  "author": "Jordan Hayashi <jhhayashi@gmail.com>",
+  "private": true,
+  "scripts": {
+    "build": "npm install",
+    "start": "node coupon-api.js"
+  },
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1"
+  }
+}
