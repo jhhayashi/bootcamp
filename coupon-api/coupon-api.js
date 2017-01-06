@@ -10,7 +10,8 @@ const users = require('./controllers/users');
 
 var app = express();
 
-mongoose.connect('localhost:5000');
+// mongoose.connect('localhost:5000');
+mongoose.connect(config.dbUrl, {server: {socketOptions: {keepAlive: 120}}});
 
 if (app.get('env') === 'development') var dev = true;
 
@@ -28,6 +29,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.get('/users', users.getUsers);
 app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
+app.put('/users/:id', users.updateUser);
+app.delete('/users/:id', users.deleteUserById);
 
 // handle 404
 app.use(function(req, res, next) {

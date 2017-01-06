@@ -1,20 +1,12 @@
 const User = require('../models/schemas/user');
 
-module.exports.createUser = function(req, res) {
+module.exports.createUser = function(req, res, next) {
     // validate input
     
-    // create actual user
-    var data = {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        password: req.body.password,
-        createdDate: new Date()
-    };
-
-    var newUser = new User(data);
+    var newUser = new User(req.body);
 
     newUser.save(function(err, user) {
+        if (err) return next(err);
         return res.send('it worked!!!');
     });
 }
