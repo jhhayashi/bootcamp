@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const config = require('./models/config');
 
 const users = require('./controllers/users');
+const coupons = require('./controllers/coupons');
 
 var app = express();
 
@@ -22,6 +23,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
+// ==========================================
+// More Middleware
+// ==========================================
+
+app.param('id', function(req, res, next, id) {
+    if (!id.match(/^[0-9a-fA-F]{24}$/))
+        return res.status(400).send('Invalid ID');
+    next();
+});
+
 //================================================
 // Routes
 //================================================
@@ -32,6 +43,12 @@ app.post('/users', users.createUser);
 app.put('/users/:id', users.updateUser);
 app.delete('/users/:id', users.deleteUserById);
 
+app.get('/coupons', coupons.getAllCoupons);
+app.get('/coupons/:id', coupons.getCouponById);
+app.post('/coupons', coupons.createCoupon);
+app.put('/coupons/:id', coupons.updateCoupon);
+app.delete('/coupons/:id', coupons.deleteCouponById);
+
 // handle 404
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -39,8 +56,8 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
-// another errorhandler
 
+// another errorhandler
 app.use(function(err, req, res, next) {
     console.log('oops');
     next(err);
