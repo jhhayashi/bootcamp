@@ -1,14 +1,16 @@
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
-// maybe this too
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const config = require('./models/config');
 
 const users = require('./controllers/users');
 
 var app = express();
+
+mongoose.connect('localhost:5000');
 
 if (app.get('env') === 'development') var dev = true;
 
@@ -24,7 +26,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //================================================
 
 app.get('/users', users.getUsers);
-// this should merge conflict
 app.get('/users/:id', users.getUserById);
 app.post('/users', users.createUser);
 
@@ -35,17 +36,15 @@ app.use(function(req, res, next) {
     err.status = 404;
     next(err);
 });
+// another errorhandler
 
-// development error handler
-if (dev) {
-    app.use(function(err, req, res, next) {
-        console.log(err);
-        res.status(err.status || 500).send();
-    });
-}
-
-// production error handler
 app.use(function(err, req, res, next) {
+    console.log('oops');
+    next(err);
+});
+
+app.use(function(err, req, res, next) {
+    console.log(err);
     res.status(err.status || 500).send();
 });
 
