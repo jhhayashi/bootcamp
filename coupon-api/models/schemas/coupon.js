@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 var couponSchema = new Schema({
-        name: {type: String, require: true, trim: true},
+        name: {type: String, required: true, trim: true},
         url: {type: String, required: true, trim: true},
         companyName: {type: String, required: true, trim: true},
         startDate: {type: Date, default: Date.now, index: true},
@@ -11,7 +11,7 @@ var couponSchema = new Schema({
         clicks: {type: [Date], default: []},
         views: {type: [Date], default: []},
         redeemed: {type: [Date], default: []},
-        postedBy: {type: Schema.ObjectId, ref: 'User', required: true},
+        postedBy: Schema.ObjectId, // {type: Schema.ObjectId, ref: 'User', required: true},
         approvedDate: Date,
     },
     {
@@ -28,7 +28,7 @@ couponSchema.pre('save', function(callback) {
     if (this.url && !(/^((https?)|(ftp)):\/\/.+/.test(this.url)))
         this.url = 'http://' + this.url;
     // update startDate on approval
-    if (thisisModified('approvedDate') && this.approvedDate > this.startDate)
+    if (this.isModified('approvedDate') && this.approvedDate > this.startDate)
         this.startDate = this.approvedDate;
 
     callback();

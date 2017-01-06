@@ -5,7 +5,9 @@
   "private": true,
   "scripts": {
     "build": "npm install",
-    "start": "node coupon-api.js"
+    "start": "node coupon-api.js",
+    "dev": "mongod -f models/mongod.conf & node coupon-api.js",
+    "mongo-kill": "killall mongod"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
