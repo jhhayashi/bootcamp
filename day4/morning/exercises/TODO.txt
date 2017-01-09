@@ -1,0 +1,4 @@
+0. Read and understand the Stylus and Pug code in app/stylesheets and app/views
+1. Read and understand the Express code in ./app.js, but don't start the TODOs
+2. Read and understand ./gruntfile.js. Complete the TODOs in this file
+3. Complete the TODOs in ./app.js
