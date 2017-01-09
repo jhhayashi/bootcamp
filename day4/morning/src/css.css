@@ -1,0 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  color: #000;
+}
+.quiet-link,
+.quiet-link:visited,
+.quiet-link:active {
+  color: #000;
+  text-decoration: none;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+.button {
+  margin: 0 auto;
+  width: auto;
+  min-width: 20%;
+  padding: 20px;
+  border-radius: 5px;
+  border: 0;
+  background-color: #c8c8c8;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: #dcdcdc;
+  background-color: rgba(200,200,200,0.7);
+}
+.half {
+  display: block;
+  width: 100%;
+}
+@media only screen and (min-width: 600px) {
+  .half {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+  }
+}
+.hidden {
+  display: none;
+}

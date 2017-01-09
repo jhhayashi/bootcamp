@@ -1,0 +1,52 @@
+text-color = #000
+
+button-color = rgb(200, 200, 200)
+button-color-transparent = rgba(200, 200, 200, .7)
+button-color-transparent-alt = rgb(220, 220, 220) 
+
+mobile-width = 600px
+
+default-border = 1px solid #888
+
+*
+    box-sizing border-box
+html, body
+    height 100%
+    margin 0
+    padding 0
+    color text-color
+
+.quiet-link, .quiet-link:visited, .quiet-link:active
+    color text-color
+    text-decoration none
+.right
+    text-align right
+.left
+    text-align left
+.center
+    text-align center
+
+.button
+    margin 0 auto
+    width auto
+    min-width 20%
+    padding 20px
+    border-radius 5px
+    border 0
+    background-color button-color
+    cursor pointer
+.button:hover
+    background-color button-color-transparent-alt
+    background-color button-color-transparent
+
+.half
+    display block
+    width 100%
+@media only screen and (min-width: mobile-width)
+    .half
+        display inline-block
+        vertical-align top
+        width 50%
+
+.hidden
+    display none
