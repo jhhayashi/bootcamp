@@ -1,0 +1,11 @@
+doctype html
+html
+  head
+    title= title || "HSA Coupon"
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/js/fetch.js')
+  body
+    block content
+    script(src='/js/script.min.js')
+    if dev
+        script(src='//localhost:10000/livereload.js')

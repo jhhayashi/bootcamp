@@ -1,0 +1,24 @@
+extends template
+
+block content
+    form#js-signup-form.form
+        h1.form-title Sign Up for Coupon Delivery
+        #js-error-message.error-message
+        input.form-input.half(type='text' name='firstName' placeholder='First name')
+        input.form-input.half(type='text' name='lastName' placeholder='Last name')
+        input.form-input(type='number' name='classYear' placeholder='Class year')
+        input.form-input(type='email' name='email' placeholder='Email')
+        input.form-input(type='phone' name='phone' placeholder='Phone number*')
+        select.form-input.half(name='phoneProvider')
+            option(value='null') --Select Provider*--
+            -for(var i = 0; i < providers.length; i++)
+                -var p = providers[i];
+                option(value='#{p.name}')= p.longName
+            option(value='other') Other
+        input.form-input.half(type='text' name='other-provider' placeholder='Other'
+            style='display:none')
+        button.form-input.button(type='button') Submit
+    .modal#js-success
+        .modal-content
+            h2 Thank you for registering!
+            p Some great coupons will be heading your way
