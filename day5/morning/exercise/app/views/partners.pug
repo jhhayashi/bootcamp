@@ -1,0 +1,9 @@
+extends template
+
+block content
+    h1.title.center Partners!
+    each group in students
+        .group
+            ul
+                each student in group
+                    li= student

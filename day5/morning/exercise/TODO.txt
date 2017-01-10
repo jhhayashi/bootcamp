@@ -1,0 +1,7 @@
+First, style the partners and coldcaller page without using flexbox.
+
+Then, re-style the partners page using flexbox.
+
+Third, implement and style the view for your index page for the dorm-supplies
+frontend. You may find the starter code at https://github.com/jhhayashi/dorm-supplies-frontend
+useful
