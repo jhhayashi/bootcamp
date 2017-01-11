@@ -39,12 +39,14 @@ exports.loginUser = function(req, res, next) {
 };
 
 exports.adminRequired = function(req, res, next) {
+    validateToken(req, res, next, { adminRequired: true });
 };
 
 exports.superAdminRequired = function(req, res, next) {
+    validateToken(req, res, next, { superAdminRequired: true });
 };
 
-function validateToken(req,res, next) {
+function validateToken(req, res, next, c) {
     var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (!token) return res.status(403).send('This endpoint requires a token');
@@ -62,12 +64,14 @@ function validateToken(req,res, next) {
             return res.status(403).send('Expired token');
         if (decoded.isAdmin !== user.isAdmin || decoded.isSuperAdmin !== user.isSuperAdmin)
             return res.status(403).send('Expired token');
-        
+       
+        if (!user.isAdmin && !user.isSuperAdmin && c.adminRequired)
+            return res.status(403).send('Admin privileges required');
+        if (!user.isSuperAdmin && c.superAdminRequired)
+            return res.status(403).send('SuperAdmin privileges required');
+
         req.user = decoded;
 
         next();
     });
 }
-
-
-
