@@ -12,7 +12,29 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.sendCouponById = function(req, res, next) {
-    return res.sendStatus(200);
+    Promise.all([
+        User.find({ phone: { $exists: true } }).exec(),
+        Coupon.findById(req.params.id).exec()
+    ]).then(function(results) {
+        var users = results[0];
+        var coupon = results[1];
+
+        if (!coupon) return res.status(404).send('No coupon with that ID');
+        if (!users.length) return res.sendStatus(200);
+
+        var text = coupon.companyName + ': ' + coupon.name + '\n' + coupon.url;
+
+		var mailOptions = {
+			from: '"' + config.emailFromName + '" <' + config.emailFromAddress + '>',
+			to: buildEmailArray(users).join(', '),
+			subject: 'New Coupon',
+			text: text
+		};
+
+        return transporter.sendMail(mailOptions);
+    }).then(function(mailInfo) {
+        return res.json(mailInfo);
+    }).catch(function(err) { return next(err); });
 };
 
 exports.sendAllCouponsToAllUsers = function(req, res, next) {
