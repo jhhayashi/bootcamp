@@ -50,7 +50,7 @@ app.post('/admins', admins.createAdmin);
 app.get('/coupons', coupons.getAllCoupons);
 app.get('/coupons/active', coupons.getActiveCoupons);
 app.get('/coupons/unapproved', coupons.getUnapprovedCoupons);
-app.put('/coupons/:id/approve', coupons.approveCoupon);
+app.put('/coupons/:id/approve', auth.superAdminRequired, coupons.approveCoupon);
 app.get('/coupons/:id', coupons.getCouponById);
 app.post('/coupons', coupons.createCoupon);
 app.put('/coupons/:id', coupons.updateCoupon);

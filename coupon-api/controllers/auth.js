@@ -21,7 +21,9 @@ exports.loginUser = function(req, res, next) {
             var payload = {
                 id: user._id,
                 email: user.email,
-                companyName: user.companyName
+                companyName: user.companyName,
+                isAdmin: !!user.isAdmin,
+                isSuperAdmin: !!user.isSuperAdmin
             };
 
             var token = jwt.encode(payload, config.secret);
@@ -41,3 +43,31 @@ exports.adminRequired = function(req, res, next) {
 
 exports.superAdminRequired = function(req, res, next) {
 };
+
+function validateToken(req,res, next) {
+    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+    if (!token) return res.status(403).send('This endpoint requires a token');
+
+    try {
+        var decoded = jwt.decode(token, config.secret);
+    } catch(err) {
+        return res.status(403).send('Failed to authenticate token');
+    }
+
+    User.findById(decoded.id, function(err, user) {
+        if (err) return next(err);
+        if (!user) return res.status(403).send('Invalid user');
+        if (token !== user.token)
+            return res.status(403).send('Expired token');
+        if (decoded.isAdmin !== user.isAdmin || decoded.isSuperAdmin !== user.isSuperAdmin)
+            return res.status(403).send('Expired token');
+        
+        req.user = decoded;
+
+        next();
+    });
+}
+
+
+
