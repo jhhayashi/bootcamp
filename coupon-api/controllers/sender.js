@@ -12,9 +12,11 @@ var transporter = nodemailer.createTransport({
 });
 
 exports.sendCouponById = function(req, res, next) {
+    return res.sendStatus(200);
 };
 
 exports.sendAllCouponsToAllUsers = function(req, res, next) {
+    return res.sendStatus(200);
 };
 
 

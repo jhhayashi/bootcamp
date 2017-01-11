@@ -21,6 +21,8 @@ var router = express.Router();
 
 // log if in dev mode
 if (app.get('env') !== 'production') app.use(logger('dev'));
+// run init script from init directory
+require('./init/init');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,7 +48,7 @@ router.param('phone', (req, res, next, phone) => {
 //================================================
 
 router.route('/users')
-    .get(auth.superAdminRequired, users.getAllUsers)
+    .get(auth.superAdminRequired, users.getUsers)
     .post(users.createUser);
 router.route('/users/send')
     .post(auth.superAdminRequired, sender.sendAllCouponsToAllUsers);
