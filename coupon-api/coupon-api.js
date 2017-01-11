@@ -7,7 +7,9 @@ const mongoose = require('mongoose');
 const config = require('./models/config');
 
 const users = require('./controllers/users');
+const admins = require('./controllers/admins');
 const coupons = require('./controllers/coupons');
+const auth = require('./controllers/auth');
 
 var app = express();
 
@@ -43,6 +45,8 @@ app.post('/users', users.createUser);
 app.put('/users/:id', users.updateUser);
 app.delete('/users/:id', users.deleteUserById);
 
+app.post('/admins', admins.createAdmin);
+
 app.get('/coupons', coupons.getAllCoupons);
 app.get('/coupons/active', coupons.getActiveCoupons);
 app.get('/coupons/unapproved', coupons.getUnapprovedCoupons);
@@ -52,6 +56,7 @@ app.post('/coupons', coupons.createCoupon);
 app.put('/coupons/:id', coupons.updateCoupon);
 app.delete('/coupons/:id', coupons.deleteCouponById);
 
+app.post('/auth/token', auth.loginUser);
 
 // handle 404
 app.use(function(req, res, next) {

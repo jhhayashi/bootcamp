@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
         firstName: {type: String, trim: true},
@@ -34,7 +35,8 @@ userSchema.pre('save', function(callback) {
         if (!this.companyName)
             return callback(new Error('Missing companyName'));
 
-        // TODO hash
+        if (this.isModified('hash'))
+            this.hash = bcrypt.hashSync(this.hash);
     }
 
     else {
@@ -72,8 +74,11 @@ userSchema.virtual('name').get(function() {
 });
 
 // methods for validating password
-userSchema.methods.comparePassword = function(pw) {
-    return (pw === this.hash);
+userSchema.methods.comparePassword = function(pw, callback) {
+	bcrypt.compare(pw, this.hash, function(err, isMatch) {
+		if (err) return callback(err);
+		callback(null, isMatch);
+	});
 };
 
 var User = mongoose.model('User', userSchema);
