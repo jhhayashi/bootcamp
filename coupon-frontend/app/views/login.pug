@@ -1,0 +1,16 @@
+extends template
+
+block content
+    #navbar.left
+        a(href='/').quiet-link.navbar-item < Back
+    form#js-login-form.form
+        h1.form-title Login
+        #js-error-message.error-message
+        input.form-input(type='email' name='email' placeholder='Email'
+            onfocus='clearError(this)')
+        input.form-input(type='password' name='password' placeholder='Password'
+            onfocus='clearError(this)')
+        button.form-input.button(type='button' onclick='submitLogin()') Submit
+
+block postScript
+    script submitOnEnterKey(submitLogin);

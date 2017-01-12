@@ -1,12 +1,74 @@
+@require "helpers"
+
+text-color = #000
+mobile-width = 600px
+
+@font-face
+    font-family roboto
+    src url(/fonts/Roboto-Regular.ttf)
+@font-face
+    font-family roboto
+    src url(/fonts/Roboto-Italic.ttf)
+    font-style italic
+@font-face
+    font-family roboto
+    src url(/fonts/Roboto-Bold.ttf)
+    font-weight bold
+@font-face
+    font-family roboto
+    src url(/fonts/Roboto-BoldItalic.ttf)
+    font-weight bold
+    font-style italic
+
 *
     box-sizing border-box
 html, body
     height 100%
+    margin 0
+    padding 0
+    color text-color
+    font-family roboto
 
-#signup-form
+.quiet-link, .quiet-link:visited, .quiet-link:active
+    color text-color
+    text-decoration none
+.right
+    text-align right
+.left
+    text-align left
+.center
+    text-align center
+
+.error
+    color red
+    font-weight bold
+
+#navbar
+    background-color #ddd
+.navbar-item-wrap
+    margin 0 auto
+    max-width 1080px
+.navbar-item
+    display block
+    padding 1rem
+    text-align center
+.navbar-item:hover
+    background-color rgb(220, 220, 220)
+    background-color rgba(200, 200, 200, .7)
+    cursor pointer
+@media only screen and (min-width: 350px)
+    .navbar-item
+        display inline-block
+
+.form
     width 90%
     max-width 600px
     margin 0 auto
+.form-title
+    width 100%
+    margin 0
+    padding-top 1rem
+    text-align center
 .form-input
     display block
     width 100%
@@ -28,22 +90,34 @@ html, body
 .button:hover
     background-color rgb(220, 220, 220)
     background-color rgba(200, 200, 200, .7)
+
+.month-select, .day-select, .year-select
+    margin 0 .4rem
+    padding 5px
+    border-radius 5px
+    font-size 18px
+    line-height 2rem
+.date-input
+    display inline-block
+    color #a9a9a9
+
 .half
     display block
     width 100%
-
-@media only screen and (min-width: 600px)
+@media only screen and (min-width: mobile-width)
     .half
         display inline-block
         width 50%
 
+.hidden
+    display none
 
-#error-message
+.error-message
     visibility hidden
     color red
     font-weight bold
     text-align left
-    margin 1rem 0
+    padding 1rem 0
 .modal
     display none
     position fixed
@@ -63,3 +137,28 @@ html, body
     background-color white
     border-radius 5px
     text-align center
+
+.coupon
+    margin 0 auto 1rem auto
+    padding .5rem
+    width 90%
+    max-width 600px
+    border 1px solid #888
+    border-radius 5px
+.coupon-info
+    display block
+.coupon-name
+    font-size 1.25rem
+    font-weight bold
+.coupon-button
+    display block
+    max-width 100px
+    margin 0 auto
+    float none
+
+@media only screen and (min-width: mobile-width)
+    .coupon-info
+        display inline-block
+        max-width 75%
+    .coupon-button
+        float right    

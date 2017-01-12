@@ -7,5 +7,8 @@ html
   body
     block content
     script(src='/js/script.min.js')
+    if token
+        script localStorage.token = "#{token}"
+    block postScript
     if dev
         script(src='//localhost:10000/livereload.js')

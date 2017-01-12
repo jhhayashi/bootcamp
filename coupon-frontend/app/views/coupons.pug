@@ -1,0 +1,30 @@
+extends template
+
+block content
+    #navbar.right
+      .navbar-item-wrap
+        if isSuperAdmin
+            a(href='/admin/manage?token=' + token).quiet-link.navbar-item Manage Coupons
+            a(href='/admin/users?token=' + token).quiet-link.navbar-item Create User
+        a(href='/logout').quiet-link.navbar-item Logout
+    form#js-coupon-form.form
+        h1.form-title Create Coupon
+        #js-error-message.error-message
+        input.form-input(type='text' name='name' placeholder='Coupon name'
+            onfocus='clearError(this)')
+        input.form-input(type='text' name='url' placeholder='Url'
+            onfocus='clearError(this)' onblur='validateUrl(this, true)')
+        label.form-input Start date:
+            .js-date-input.date-input(name='startDate')
+        label.form-input #[input(type='checkbox' name='hasEndDate' onchange='toggleEndDate()')] Expires
+            .js-date-input.date-input.hidden(name='endDate')
+        if !isAdmin
+            input.form-input(type='text' name='companyName' placeholder='Company Name')
+        button.form-input.button(type='button' onclick='submitCouponForm()') Submit
+    .modal#js-success
+        .modal-content
+            h2 Thank you for adding this coupon
+            p We will deliver it once it's approved
+
+block postScript
+    script submitOnEnterKey(submitCouponForm);

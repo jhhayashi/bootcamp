@@ -1,24 +1,33 @@
 extends template
 
 block content
+    #navbar.right
+        a(href='/login').quiet-link.navbar-item Admin Login >
     form#js-signup-form.form
         h1.form-title Sign Up for Coupon Delivery
-        #error-message.error-message
+        #js-error-message.error-message
         input.form-input.half(type='text' name='firstName' placeholder='First name')
         input.form-input.half(type='text' name='lastName' placeholder='Last name')
         input.form-input(type='number' name='classYear' placeholder='Class year')
-        input.form-input(type='email' name='email' placeholder='Email' onfocus='clearError(this)')
-        input.form-input(type='phone' name='phone' placeholder='Phone number*' onfocus='clearError(this)')
-        select.form-input.half(name='phoneProvider' onfocus='clearError(this)' onchange='checkOther()')
+        input.form-input(type='email' name='email' placeholder='Email'
+                onFocus='clearError(this)' onBlur='validateEmail(this)')
+        input.form-input(type='phone' name='phone' placeholder='Phone number*'
+                onFocus='clearError(this)' onBlur='validatePhone(this, true)')
+        select.form-input.half(name='phoneProvider' onFocus='clearError(this)'
+                onchange='validateProvider(true)')
             option(value='null') --Select Provider*--
             -for(var i = 0; i < providers.length; i++)
                 -var p = providers[i];
-                option(value= p.name)= p.longName
+                option(value='#{p.name}')= p.longName
             option(value='other') Other
         input.form-input.half(type='text' name='other-provider' placeholder='Other'
-            style='display:none')
+            style='display:none' onFocus='clearError(this)'
+            onBlur='validateProvider(true)')
         button.form-input.button(type='button' onclick='submitForm()') Submit
     .modal#js-success
         .modal-content
             h2 Thank you for registering!
             p Some great coupons will be heading your way
+
+block postScript
+    script submitOnEnterKey(submitForm);
