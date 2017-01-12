@@ -100,6 +100,35 @@ function submitForm() {
 
 // TODO
 function submitLogin() {
+    var errorMessage = ''
+    if (!form.email.value) {
+        error(form.email);
+        errorMessage += 'Missing email!'
+    }
+    if (!form.password.value) {
+        error(form.password);
+        if (errorMessage) errorMessage += '<br />'
+        errorMessage += 'Missing password!'
+    }
+    if (errorMessage) return displayError(errorMessage);
+    
+    var data = {
+        email: form.email.value,
+        password: form.password.value
+    };
+
+    fetch('/login', {
+        headers: { 'Content-Type': 'application/json' },
+        method: 'POST',
+        body: JSON.stringify(data)
+    })
+    .then(function(res) {
+        if (!res.ok) return submitError(res);
+        else return res.json().then(function(result) {
+            localStorage.token = result.token;
+            window.location = '/admin?token=' + result.token;
+        });
+    }).catch(submitError);
 }
 
 function submitCouponForm() {
